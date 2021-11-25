@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @user.description %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @user.age %>
+</p>
+
+<p>---------------Задачи---------------</p>
+
+<% @user.tasks.each do |task| %>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= task.title %>
+  </p>
+
+  <p>
+    <strong>Text:</strong>
+    <%= task.text %>
+  </p>
+  
+  <p>
+    <strong>Hours spent:</strong>
+    <%= task.hours_spent %>
+  </p>
+  
+  <%= link_to 'Edit', edit_task_path(task) %>
+<% end %>
+
+<p>---------------Создать задачу---------------</p>
+
+<%= form_with url: "/tasks", method: :post do |form| %>
+  <%= form.hidden_field :user_id %>
+  <%= hidden_field_tag 'user_id', @user.id  %>
+  <%= form.label :title, "Заголовок" %>
+  <%= form.text_field :title %>
+  <%= form.label :title, "Описание" %>
+  <%= form.text_field :text %>
+  <%= form.label :title, "Потраченное время" %>
+  <%= form.text_field :hours_spent %>
+  <%= form.submit "Создать задачу" %>
+<% end %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
